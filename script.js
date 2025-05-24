@@ -248,7 +248,7 @@ const testimonials = [
     {
         quote: "Great things are not done by impulse, but by a series of small things brought together",
         author: "Leonardo - CEO of Jalu Company",
-        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face"
+        image: "image.png"
     },
     {
         quote: "Sandy's attention to detail and creative approach made our project exceptional. Highly recommended!",
