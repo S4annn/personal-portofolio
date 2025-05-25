@@ -1706,6 +1706,7 @@ body {
 }
 
 
+
 /* Media Queries */
 @media (max-width: 1200px) {
     .site-header { padding: 21px 35px; }
@@ -1759,9 +1760,11 @@ body {
         backdrop-filter: blur(10px);
         font-size: 12px;
     }
-    .pointing-arrow { display: none; }
     .hero-subtitle { font-size: 11px; }
     
+    .arrow-for-fullstack { left: -30px; bottom: 90  px; font-size: 15px;}
+    .arrow-for-uiux { right: -20px; bottom: 100px; font-size: 15px;}
+
     .hero-buttons-container {
         flex-direction: column; /* Tombol menjadi vertikal di layar kecil */
         gap: 0.75rem;
