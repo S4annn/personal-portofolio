@@ -186,7 +186,7 @@
                 {
                     quote: "Great things are not done by impulse, but by a series of small things brought together",
                     author: "Leonardo - CEO of Jalu Company",
-                    image: "image.png"
+                    image: "images/image.png"
                 },
                 {
                     quote: "Sandy's attention to detail and creative approach made our project exceptional. Highly recommended!",
