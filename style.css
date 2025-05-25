@@ -412,6 +412,26 @@ body {
     }
 }
 
+.hero-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem; 
+    flex-direction: row; /* memastikan horizontal */
+    flex-wrap: wrap;
+    margin-top: 14px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: buttonsSlideUp 1s ease-out 1.5s forwards;
+}
+
+@keyframes buttonsSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .connect-button {
     background: linear-gradient(45deg, #333333, #444444);
     color: white;
@@ -421,23 +441,12 @@ body {
     font-weight: 500;
     text-decoration: none;
     display: inline-block;
-    margin-top: 14px;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     border: 1px solid rgba(124, 58, 237, 0.2);
     cursor: pointer;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: buttonSlideUp 1s ease-out 1.5s forwards;
-}
-
-@keyframes buttonSlideUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 .connect-button::before {
@@ -461,6 +470,48 @@ body {
     background: linear-gradient(45deg, #444444, #555555);
     border-color: rgba(124, 58, 237, 0.4);
 }
+
+/* CV Button Style */
+.cv-button {
+    background: transparent;
+    color: #e5e5e5;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cv-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.cv-button:hover::before {
+    left: 100%;
+}
+
+.cv-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(124, 58, 237, 0.2);
+    border-color: rgba(124, 58, 237, 0.5);
+    background: rgba(124, 58, 237, 0.1);
+    color: white;
+}
+
 
 /* About Section */
 .about-section {
@@ -612,28 +663,6 @@ body {
     max-width: 400px;
     width: 100%;
 }
-
-/* Opsi 2: Alternatif menggunakan CSS Grid dengan grid-template-areas */
-/*
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas: 
-        "frontend backend design"
-        "tools tools tools";
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.skill-category:nth-child(1) { grid-area: frontend; }
-.skill-category:nth-child(2) { grid-area: backend; }
-.skill-category:nth-child(3) { grid-area: design; }
-.skill-category:nth-child(4) { 
-    grid-area: tools; 
-    max-width: 400px;
-    justify-self: center;
-}
-*/
 
 .skill-category {
     background: rgba(255, 255, 255, 0.02);
@@ -788,15 +817,15 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
-    position: relative; /* Tambahkan position relative */
-    z-index: 1; /* Z-index rendah untuk container */
+    position: relative; 
+    z-index: 1; 
 }
 
 .projects-header {
     text-align: center;
     margin-bottom: 3rem;
-    position: relative; /* Tambahkan position relative */
-    z-index: 10000; /* Z-index tinggi untuk header */
+    position: relative; 
+    z-index: 10000; 
 }
 
 .projects-header h2 {
@@ -813,7 +842,7 @@ body {
 .filter-dropdown {
     position: relative;
     display: inline-block;
-    z-index: 10000; /* Tambahkan z-index tinggi untuk parent */
+    z-index: 10000; 
 }
 
 .dropdown-btn {
@@ -845,29 +874,30 @@ body {
     min-width: 160px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     border-radius: 12px;
-    z-index: 9999; /* Ubah dari z-index: 1 menjadi 9999 */
+    z-index: 9999;
     top: 100%;
     left: 0;
     margin-top: 0.5rem;
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
 }
 
 .dropdown-content.show {
     display: block;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .dropdown-content a {
+    padding: 10px 15px;
     color: #e5e5e5;
-    padding: 0.75rem 1rem;
     text-decoration: none;
     display: block;
     transition: all 0.3s ease;
+}
+
+.dropdown-content a.active {
+    background: rgba(124, 58, 237, 0.3);
+    color: white;
+    font-weight: 500;
 }
 
 .dropdown-content a:hover {
@@ -876,45 +906,21 @@ body {
     transform: translateX(5px);
 }
 
-/* Memastikan filter dropdown memiliki positioning yang benar */
-.filter-dropdown {
-    position: relative;
-    display: inline-block;
-    z-index: 10000; /* Tambahkan z-index tinggi untuk parent */
-}
-
-/* Mencegah overflow pada projects container */
-.projects-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    position: relative; /* Tambahkan position relative */
-    z-index: 1; /* Z-index rendah untuk container */
-}
-
-/* Memastikan dropdown tidak terpotong */
-.projects-header {
-    text-align: center;
-    margin-bottom: 3rem;
-    position: relative; /* Tambahkan position relative */
-    z-index: 10000; /* Z-index tinggi untuk header */
-}
-
-/* Overlay untuk menutup dropdown ketika klik di luar */
 .dropdown-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9998;
     background: transparent;
+    z-index: 9998;
     display: none;
 }
 
 .dropdown-overlay.show {
     display: block;
 }
+
 
 .projects-grid {
     display: grid;
@@ -932,6 +938,17 @@ body {
     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     opacity: 0;
     transform: translateY(30px) scale(0.95);
+}
+
+.project-card.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: none; /* Ditambahkan agar benar-benar hilang */
 }
 
 .project-card.animate {
@@ -1554,6 +1571,11 @@ body {
     cursor: pointer;
 }
 
+.footer-like .active {
+    color: red;
+    transform: scale(1.2);
+}
+
 .footer-like:hover {
     transform: scale(1.1) rotate(10deg);
     box-shadow: 0 15px 35px rgba(124, 58, 237, 0.3);
@@ -1604,6 +1626,7 @@ body {
     color: rgba(255, 255, 255, 0.9);
 }
 
+
 /* Media Queries */
 @media (max-width: 1200px) {
     .site-header { padding: 21px 35px; }
@@ -1638,14 +1661,14 @@ body {
         padding: 21px 14px; 
         flex-direction: column; 
         text-align: center;
-        position: relative;
+        position: relative; /* Changed from fixed for smaller screens if nav pushes content */
     }
     .main-nav ul { flex-direction: column; margin-top: 14px; }
     .main-nav ul li { margin: 7px 0; }
     .header-icons { margin-top: 14px; }
     .social-icon-link { margin-left: 7px; margin-right: 7px;}
 
-    .hero-section { padding-top: 200px; }
+    .hero-section { padding-top: 200px; } /* Adjust if header height changes drastically */
     .hero-title { font-size: 28px; }
     .profile-image { width: 140px; height: 140px; }
     .role-badge { 
@@ -1659,7 +1682,16 @@ body {
     }
     .pointing-arrow { display: none; }
     .hero-subtitle { font-size: 11px; }
-    .connect-button { font-size: 14px; padding: 8px 21px; }
+    
+    .hero-buttons-container {
+        flex-direction: column; /* Tombol menjadi vertikal di layar kecil */
+        gap: 0.75rem;
+    }
+    .connect-button, .cv-button { 
+        font-size: 14px; 
+        padding: 10px 24px; 
+    }
+
 
     .about-content {
         grid-template-columns: 1fr;
@@ -1680,8 +1712,8 @@ body {
     }
     
     .skill-category:nth-child(4) {
-        grid-column: 1;
-        max-width: none;
+        grid-column: 1; /* Full width for single column */
+        max-width: none; /* Allow it to take full width */
     }
 
     .projects-grid { grid-template-columns: 1fr; gap: 1.5rem; }
@@ -1706,7 +1738,11 @@ body {
     .hero-title { font-size: 22px; }
     .hero-subtitle { font-size: 10px; }
     .profile-image { width: 105px; height: 105px; }
-    .connect-button { font-size: 13px; }
+    
+    .connect-button, .cv-button { 
+        font-size: 13px; 
+        padding: 8px 20px;
+    }
     .social-icon-link { font-size: 11px; width: 21px; height: 21px; padding: 4px; margin-left: 4px;}
 
     .about-section, .skills-section, .projects-section, .testimonials-section, .contact-section {
@@ -1729,9 +1765,12 @@ body {
     .footer-projects { grid-template-columns: 1fr; }
 }
 
+/* .project-card.hidden sudah ada di atas, pastikan hanya satu definisi */
+/*
 .project-card.hidden {
     display: none;
 }
+*/
 
 /* Smooth scrolling */
 html {
@@ -1740,7 +1779,7 @@ html {
 
 /* Section spacing */
 section {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 80px; /* Sesuaikan nilai ini dengan tinggi header Anda yang fixed */
 }
 
 /* Loading animation */

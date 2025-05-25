@@ -83,8 +83,10 @@
                     bring ideas to life through clean code and intuitive design.
                     Let's build something amazing together.
                 </p>
-                <a href="#contact" class="connect-button">Connect with me</a>
-
+                <div class="hero-buttons-container">
+                    <a href="your-cv-link.pdf" class="cv-button">Download CV</a>
+                    <a href="#contact" class="connect-button">Let's Connect</a>
+                </div>
                 <div class="scroll-indicator">
                     <i class="fas fa-chevron-down"></i>
                 </div>
@@ -113,7 +115,7 @@
 
                         <p>Can spend hours each day exploring design and
                             development. You can see some of my design
-                            explorations on <a href="#"
+                            explorations on <a href="https://dribbble.com/S4ann"
                                 class="about-link">Dribbble</a> and code
                             projects on <a href="https://www.github.com/S4annn"
                                 class="about-link">GitHub</a>.</p>
@@ -373,7 +375,7 @@
                     <h2>My Projects</h2>
                     <div class="filter-dropdown">
                         <button class="dropdown-btn" onclick="toggleDropdown()">
-                            <span id="selected-filter">UI Design</span>
+                            <span id="selected-filter">All Projects</span>
                             <svg class="icon" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round"
@@ -382,395 +384,433 @@
                             </svg>
                         </button>
                         <div class="dropdown-content" id="dropdown-content">
-                            <a href="#" onclick="filterProjects('all')">All
-                                Projects</a>
-                            <a href="#" onclick="filterProjects('ui-design')">UI
-                                Design</a>
-                            <a href="#"
-                                onclick="filterProjects('web-development')">Web
+                            <a href="#" data-category="all">All Projects</a>
+                            <a href="#" data-category="ui-design">UI Design</a>
+                            <a href="#" data-category="web-development">Web
                                 Development</a>
-                            <a href="#"
-                                onclick="filterProjects('mobile-app')">Mobile
+                            <a href="#" data-category="mobile-app">Mobile
                                 App</a>
-                            <a href="#"
-                                onclick="filterProjects('branding')">Branding</a>
+                            <a href="#" data-category="branding">Branding</a>
                         </div>
                     </div>
-                </div>
+                    <div class="dropdown-overlay" id="dropdownOverlay"></div>
 
-                <div class="projects-grid">
-                    <div class="project-card" data-category="ui-design">
-                        <div class="project-image">
-                            <div class="project-mockup">
-                                <div class="mockup-header">
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
+                    <div class="projects-grid">
+                        <div class="project-card" data-category="ui-design">
+                            <div class="project-image">
+                                <div class="project-mockup">
+                                    <div class="mockup-header">
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                    </div>
+                                    <div class="project-image">
+                                        <img src="ui2.png"
+                                            alt="Project Screenshot"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="mockup-content"></div>
                                 </div>
-                                <div class="project-image">
-                                    <img src="profgun.jpg"
-                                        alt="Project Screenshot"
-                                        style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title">Track Money App
+                                    UI</h3>
+                                <p class="project-description">A modern NFT
+                                    marketplace platform with dark theme design,
+                                    featuring collection browsing and trading
+                                    capabilities.</p>
+                                <div class="project-actions">
+                                    <a href="#" class="btn btn-primary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        View Study Case
+                                    </a>
+                                    <a href="#" class="btn btn-secondary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        View Website
+                                    </a>
                                 </div>
-                                <div class="mockup-content"></div>
                             </div>
                         </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Organization Website</h3>
-                            <p class="project-description">A modern NFT
-                                marketplace platform with dark theme design,
-                                featuring collection browsing and trading
-                                capabilities.</p>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    View Study Case
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    View Website
-                                </a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="project-card" data-category="web-development">
-                        <div class="project-image">
-                            <div class="project-mockup">
-                                <div class="mockup-header">
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
+                        <div class="project-card"
+                            data-category="web-development">
+                            <div class="project-image">
+                                <div class="project-mockup">
+                                    <div class="mockup-header">
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                    </div>
+                                    <div class="project-image">
+                                        <img src="organization.png"
+                                            alt="Project Screenshot"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="mockup-content"></div>
                                 </div>
-                                <div class="mockup-content"></div>
                             </div>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Real Estate Platform</h3>
-                            <p class="project-description">Find apartments at
-                                low prices in your location with advanced search
-                                filters and interactive map integration.</p>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    View Study Case
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    View Website
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-category="ui-design">
-                        <div class="project-image">
-                            <div class="project-mockup">
-                                <div class="mockup-header">
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
+                            <div class="project-info">
+                                <h3 class="project-title">Organization
+                                    Website</h3>
+                                <p class="project-description">Find apartments
+                                    at
+                                    low prices in your location with advanced
+                                    search
+                                    filters and interactive map integration.</p>
+                                <div class="project-actions">
+                                    <a href="#" class="btn btn-primary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        View Study Case
+                                    </a>
+                                    <a href="#" class="btn btn-secondary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        View Website
+                                    </a>
                                 </div>
-                                <div class="mockup-content"></div>
                             </div>
                         </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Virtual Event
-                                Platform</h3>
-                            <p class="project-description">Create virtual events
-                                within minutes with this comprehensive event
-                                management platform and live streaming
-                                capabilities.</p>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    View Study Case
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    View Website
-                                </a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="project-card" data-category="web-development">
-                        <div class="project-image">
-                            <div class="project-mockup">
-                                <div class="mockup-header">
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
+                        <div class="project-card" data-category="ui-design">
+                            <div class="project-image">
+                                <div class="project-mockup">
+                                    <div class="mockup-header">
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                    </div>
+                                    <div class="project-image">
+                                        <img src="personal1.png"
+                                            alt="Project Screenshot"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="mockup-content"></div>
                                 </div>
-                                <div class="mockup-content"></div>
                             </div>
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Digital Marketplace</h3>
-                            <p class="project-description">Discover, collect,
-                                and sell various extraordinary NFTs with
-                                advanced filtering and trending product
-                                features.</p>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    View Study Case
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    View Website
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="project-card" data-category="branding">
-                        <div class="project-image">
-                            <div class="project-mockup">
-                                <div class="mockup-header">
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
+                            <div class="project-info">
+                                <h3 class="project-title">Personal Portofolio
+                                    UI</h3>
+                                <p class="project-description">Create virtual
+                                    events
+                                    within minutes with this comprehensive event
+                                    management platform and live streaming
+                                    capabilities.</p>
+                                <div class="project-actions">
+                                    <a href="#" class="btn btn-primary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        View Study Case
+                                    </a>
+                                    <a href="#" class="btn btn-secondary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        View Website
+                                    </a>
                                 </div>
-                                <div class="mockup-content"></div>
                             </div>
                         </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Car Rental Service</h3>
-                            <p class="project-description">Rent a car you need
-                                with this modern car rental platform featuring
-                                booking system and vehicle comparison.</p>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    View Study Case
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    View Website
-                                </a>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="project-card" data-category="mobile-app">
-                        <div class="project-image">
-                            <div class="project-mockup">
-                                <div class="mockup-header">
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
-                                    <div class="mockup-dot"></div>
+                        <div class="project-card"
+                            data-category="web-development">
+                            <div class="project-image">
+                                <div class="project-mockup">
+                                    <div class="mockup-header">
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                    </div>
+                                    <div class="project-image">
+                                        <img src="rentcar.png"
+                                            alt="Project Screenshot"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="mockup-content"></div>
                                 </div>
-                                <div class="mockup-content"></div>
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title">Rent and Service
+                                    Cars</h3>
+                                <p class="project-description">Rent a car you
+                                    need
+                                    with this modern car rental platform
+                                    featuring
+                                    booking system and vehicle comparison.</p>
+                                <div class="project-actions">
+                                    <a href="#" class="btn btn-primary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        View Study Case
+                                    </a>
+                                    <a href="#" class="btn btn-secondary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        View Website
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <div class="project-info">
-                            <h3 class="project-title">Mobile Banking App</h3>
-                            <p class="project-description">Modern mobile banking
-                                application with clean interface, transaction
-                                history, and secure payment features.</p>
-                            <div class="project-actions">
-                                <a href="#" class="btn btn-primary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    </svg>
-                                    View Study Case
-                                </a>
-                                <a href="#" class="btn btn-secondary">
-                                    <svg class="icon" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                    </svg>
-                                    View Website
-                                </a>
+
+                        <div class="project-card" data-category="ui-design">
+                            <div class="project-image">
+                                <div class="project-mockup">
+                                    <div class="mockup-header">
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                    </div>
+                                    <div class="project-image">
+                                        <img src="ui3.png"
+                                            alt="Project Screenshot"
+                                            style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <div class="mockup-content"></div>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title">Cake Store UI</h3>
+                                <p class="project-description">Rent a car you
+                                    need
+                                    with this modern car rental platform
+                                    featuring
+                                    booking system and vehicle comparison.</p>
+                                <div class="project-actions">
+                                    <a href="#" class="btn btn-primary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        View Study Case
+                                    </a>
+                                    <a href="#" class="btn btn-secondary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        View Website
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="project-card" data-category="mobile-app">
+                            <div class="project-image">
+                                <div class="project-mockup">
+                                    <div class="mockup-header">
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                        <div class="mockup-dot"></div>
+                                    </div>
+                                    <div class="mockup-content"></div>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3 class="project-title">Mobile Banking
+                                    App</h3>
+                                <p class="project-description">Modern mobile
+                                    banking
+                                    application with clean interface,
+                                    transaction
+                                    history, and secure payment features.</p>
+                                <div class="project-actions">
+                                    <a href="#" class="btn btn-primary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        View Study Case
+                                    </a>
+                                    <a href="#" class="btn btn-secondary">
+                                        <svg class="icon" fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                        </svg>
+                                        View Website
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="interest-section">
-            <div class="interest-container fade-in-up">
-                <h2 class="interest-title">Interest working with me?</h2>
-                <div class="interest-buttons">
-                    <a href="#projects"
-                        class="interest-btn interest-btn-secondary">See More
-                        Project</a>
-                    <a href="mailto:sandyteukupranata15@gmail.com"
-                        class="interest-btn interest-btn-primary">Email me</a>
+            <section class="interest-section">
+                <div class="interest-container fade-in-up">
+                    <h2 class="interest-title">Interest working with me?</h2>
+                    <div class="interest-buttons">
+                        <a href="#projects"
+                            class="interest-btn interest-btn-secondary">See More
+                            Project</a>
+                        <a href="mailto:sandyteukupranata15@gmail.com"
+                            class="interest-btn interest-btn-primary">Email
+                            me</a>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="testimonials" class="testimonials-section">
-            <div class="testimonials-container">
-                <div class="testimonial-card" id="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="testimonial-label">Testimonial</div>
-                        <div class="testimonial-quote">
-                            "Great things are not done by impulse, but by a series of small things brought together"
+            <section id="testimonials" class="testimonials-section">
+                <div class="testimonials-container">
+                    <div class="testimonial-card" id="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="testimonial-label">[Fake]
+                                Testimonial</div>
+                            <div class="testimonial-quote">
+                                "Great things are not done by impulse, but by a series of small things brought together"
+                            </div>
+                            <div class="testimonial-author">Leonardo - CEO of
+                                Jalu
+                                Company</div>
                         </div>
-                        <div class="testimonial-author">Leonardo - CEO of Jalu
-                            Company</div>
+                        <img
+                            src="image.png"
+                            alt="Leonardo" class="testimonial-image">
                     </div>
-                    <img
-                        src="image.png"
-                        alt="Leonardo" class="testimonial-image">
-                </div>
 
-                <div class="testimonial-nav">
-                    <div class="nav-arrow" onclick="previousTestimonial()">
-                        <i class="fas fa-chevron-left"></i>
-                    </div>
-                    <div class="nav-dots">
-                        <div class="nav-dot active"
-                            onclick="showTestimonial(0)"></div>
-                        <div class="nav-dot" onclick="showTestimonial(1)"></div>
-                        <div class="nav-dot" onclick="showTestimonial(2)"></div>
-                    </div>
-                    <div class="nav-arrow" onclick="nextTestimonial()">
-                        <i class="fas fa-chevron-right"></i>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact" class="contact-section">
-            <div class="contact-container fade-in-up">
-                <h2 class="contact-title">Get in touch</h2>
-                <p class="contact-subtitle">
-                    For business inquiry please send email to
-                    <a href="mailto:sandyteukupranata@gmail.com"
-                        class="contact-email">sandyteukupranataa15@gmail.com</a>
-                </p>
-
-                <div class="contact-social">
-                    <a href="#" class="contact-social-link" title="Website">
-                        <i class="fas fa-globe"></i>
-                    </a>
-                    <a href="https://www.instagram.com/sndyytp._"
-                        class="contact-social-link" title="Instagram">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/sandyteukupranata"
-                        class="contact-social-link" title="LinkedIn">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <footer class="footer">
-            <div class="footer-container">
-                <div class="footer-like">
-                    <i class="fas fa-thumbs-up"></i>
-                </div>
-
-                <div class="footer-title">Personal Portfolio design exploration
-                    | Sandy Teuku Pranata</div>
-                <div class="footer-date">Published: May 25th 2025</div>
-
-                <div class="footer-projects">
-                    <div class="footer-project fade-in-up stagger-animation"
-                        style="--delay: 0.1s">
-                        <div>Mobile App Design</div>
-                    </div>
-                    <div class="footer-project fade-in-up stagger-animation"
-                        style="--delay: 0.2s">
-                        <div>Web Development</div>
-                    </div>
-                    <div class="footer-project fade-in-up stagger-animation"
-                        style="--delay: 0.3s">
-                        <div>UI/UX Design</div>
-                    </div>
-                    <div class="footer-project fade-in-up stagger-animation"
-                        style="--delay: 0.4s">
-                        <div>Branding Project</div>
+                    <div class="testimonial-nav">
+                        <div class="nav-arrow" onclick="previousTestimonial()">
+                            <i class="fas fa-chevron-left"></i>
+                        </div>
+                        <div class="nav-dots">
+                            <div class="nav-dot active"
+                                onclick="showTestimonial(0)"></div>
+                            <div class="nav-dot"
+                                onclick="showTestimonial(1)"></div>
+                            <div class="nav-dot"
+                                onclick="showTestimonial(2)"></div>
+                        </div>
+                        <div class="nav-arrow" onclick="nextTestimonial()">
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </footer>
-        <script src="script.js"></script>
-        <div class="dropdown-overlay"></div>
-    </body>
-</html>
+            </section>
+
+            <section id="contact" class="contact-section">
+                <div class="contact-container fade-in-up">
+                    <h2 class="contact-title">Get in touch</h2>
+                    <p class="contact-subtitle">
+                        For business inquiry please send email to
+                        <a href="mailto:sandyteukupranata@gmail.com"
+                            class="contact-email">sandyteukupranataa15@gmail.com</a>
+                    </p>
+
+                    <div class="contact-social">
+                        <a href="https://sandyytp-portofolio.netlify.app/"
+                            class="contact-social-link" title="Website">
+                            <i class="fas fa-globe"></i>
+                        </a>
+                        <a href="https://www.instagram.com/sndyytp._"
+                            class="contact-social-link" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/sandyteukupranata"
+                            class="contact-social-link" title="LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="footer">
+                <div class="footer-container">
+                    <div class="footer-like">
+                        <i class="fas fa-thumbs-up"></i>
+                    </div>
+
+                    <div class="footer-title">Personal Portfolio design
+                        exploration
+                        | Sandy Teuku Pranata</div>
+                    <div class="footer-date">Published: May 25th 2025</div>
+
+                    <div class="footer-projects">
+                        <div class="footer-project fade-in-up stagger-animation"
+                            style="--delay: 0.1s">
+                            <div>Mobile App Design</div>
+                        </div>
+                        <div class="footer-project fade-in-up stagger-animation"
+                            style="--delay: 0.2s">
+                            <div>Web Development</div>
+                        </div>
+                        <div class="footer-project fade-in-up stagger-animation"
+                            style="--delay: 0.3s">
+                            <div>UI/UX Design</div>
+                        </div>
+                        <div class="footer-project fade-in-up stagger-animation"
+                            style="--delay: 0.4s">
+                            <div>Branding Project</div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="text-center text-gray-500 text-sm mt-8">
+                    &copy; 2025 Sandy Teuku Pranata. All rights reserved.
+                  </footer>                  
+            </footer>
+            <script src="script.js"></script>
+        </body>
+    </html>

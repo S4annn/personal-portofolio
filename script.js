@@ -5,13 +5,18 @@ class AnimationController {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
+        this.dropdownOpen = false;
         this.init();
     }
 
     init() {
         this.setupIntersectionObserver();
         this.setupLoadingAnimation();
-        this.setupParallaxEffects();
+        this.setupDropdown();
+        this.setupTestimonials();
+        this.setupButtonEffects();
+        this.setupSmoothScrolling();
+        this.setupFiltering();
     }
 
     setupIntersectionObserver() {
@@ -23,7 +28,6 @@ class AnimationController {
             });
         }, this.observerOptions);
 
-        // Observe all animation elements
         document.querySelectorAll('.fade-in-up, .fade-in-left, .fade-in-right, .scale-in, .skill-category, .project-card, .testimonial-card').forEach(el => {
             observer.observe(el);
         });
@@ -31,8 +35,7 @@ class AnimationController {
 
     animateElement(element) {
         element.classList.add('animate');
-        
-        // Special handling for skill progress bars
+
         if (element.classList.contains('skill-category')) {
             setTimeout(() => {
                 const progressBars = element.querySelectorAll('.skill-progress');
@@ -40,14 +43,6 @@ class AnimationController {
                     bar.classList.add('animate');
                 });
             }, 300);
-        }
-
-        // Special handling for project cards
-        if (element.classList.contains('project-card')) {
-            const delay = Array.from(element.parentNode.children).indexOf(element) * 100;
-            setTimeout(() => {
-                element.style.transitionDelay = '0s';
-            }, delay);
         }
     }
 
@@ -63,361 +58,322 @@ class AnimationController {
         });
     }
 
-    setupParallaxEffects() {
-        let ticking = false;
-        
-        const updateParallax = () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.hero-section');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                const yPos = -(scrolled * speed);
-                element.style.transform = `translateY(${yPos}px)`;
+    setupDropdown() {
+        const dropdownBtn = document.querySelector('.dropdown-btn');
+        const dropdownContent = document.getElementById('dropdown-content');
+        const dropdownOverlay = document.getElementById('dropdownOverlay');
+
+        if (!dropdownBtn || !dropdownContent || !dropdownOverlay) return;
+
+        const toggleDropdown = (show) => {
+            this.dropdownOpen = show;
+            if (show) {
+                dropdownContent.classList.add('show');
+                dropdownOverlay.classList.add('show');
+                document.body.style.overflow = '';
+            } else {
+                dropdownContent.classList.remove('show');
+                dropdownOverlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        };
+
+        dropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleDropdown(!this.dropdownOpen);
+        });
+
+        dropdownOverlay.addEventListener('click', () => {
+            toggleDropdown(false);
+        });
+
+        dropdownContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        document.addEventListener('click', (e) => {
+            if (this.dropdownOpen && !e.target.closest('.filter-dropdown')) {
+                toggleDropdown(false);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (this.dropdownOpen && e.key === 'Escape') {
+                toggleDropdown(false);
+            }
+        });
+    }
+
+    setupFiltering() {
+        const dropdownItems = document.querySelectorAll('.dropdown-content a');
+
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const category = item.getAttribute('data-category');
+                this.filterProjects(category);
+
+                dropdownItems.forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
             });
-            
-            ticking = false;
+        });
+    }
+
+    filterProjects(category) {
+        const cards = document.querySelectorAll('.project-card');
+        const selectedFilter = document.getElementById('selected-filter');
+        const dropdownContent = document.getElementById('dropdown-content');
+        const dropdownOverlay = document.getElementById('dropdownOverlay');
+
+        const categoryNames = {
+            'all': 'All Projects',
+            'ui-design': 'UI Design',
+            'web-development': 'Web Development',
+            'mobile-app': 'Mobile App',
+            'branding': 'Branding'
         };
 
-        const requestTick = () => {
-            if (!ticking) {
-                requestAnimationFrame(updateParallax);
-                ticking = true;
-            }
-        };
+        selectedFilter.textContent = categoryNames[category];
 
-        window.addEventListener('scroll', requestTick);
-    }
-}
+        cards.forEach((card, index) => {
+            if (category === 'all' || card.dataset.category === category) {
+                card.classList.remove('hidden');
+                card.style.display = 'block';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
 
-// Initialize animation controller
-const animationController = new AnimationController();
-
-// Navigation functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const header = document.getElementById('header');
-    
-    // Smooth scrolling for navigation links
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-            
-            // Update active nav link
-            navLinks.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-    
-    // Enhanced header scroll effect
-    let lastScrollTop = 0;
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        // Hide/show header on scroll
-        if (scrollTop > lastScrollTop && scrollTop > 200) {
-            header.style.transform = 'translateY(-100%)';
-        } else {
-            header.style.transform = 'translateY(0)';
-        }
-        
-        lastScrollTop = scrollTop;
-    });
-
-    // Update active nav based on scroll position
-    const updateActiveNav = () => {
-        const sections = document.querySelectorAll('section[id]');
-        const scrollPos = window.scrollY + 100;
-
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-
-            if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            } else {
+                card.classList.add('hidden');
+                card.style.display = 'none';
             }
         });
-    };
 
-    window.addEventListener('scroll', updateActiveNav);
-});
-
-// Enhanced Projects filtering functionality
-function toggleDropdown() {
-    const dropdown = document.getElementById('dropdown-content');
-    const overlay = document.querySelector('.dropdown-overlay') || createOverlay();
-    const isVisible = dropdown.classList.contains('show');
-    
-    if (isVisible) {
-        dropdown.classList.remove('show');
-        overlay.classList.remove('show');
-    } else {
-        dropdown.classList.add('show');
-        overlay.classList.add('show');
+        dropdownContent.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+        this.dropdownOpen = false;
     }
-}
 
-function createOverlay() {
-    const overlay = document.createElement('div');
-    overlay.className = 'dropdown-overlay';
-    overlay.addEventListener('click', () => {
-        document.getElementById('dropdown-content').classList.remove('show');
-        overlay.classList.remove('show');
-    });
-    document.body.appendChild(overlay);
-    return overlay;
-}
+    setupTestimonials() {
+        const testimonials = [
+            {
+                quote: "Great things are not done by impulse, but by a series of small things brought together",
+                author: "Leonardo - CEO of Jalu Company",
+                image: "image.png"
+            },
+            {
+                quote: "Sandy's attention to detail and creative approach made our project exceptional. Highly recommended!",
+                author: "Sarah Johnson - Marketing Director",
+                image: "https://t3.ftcdn.net/jpg/03/58/93/04/360_F_358930412_rodvr4vvY4LG0bUG8MKC3wwCZhWGozcW.jpg"
+            },
+            {
+                quote: "Professional, reliable, and delivers outstanding results. A pleasure to work with.",
+                author: "Michael Chen - Startup Founder",
+                image: "https://media.istockphoto.com/id/1354898581/photo/shot-of-a-young-businessman-using-a-laptop-in-a-modern-office.jpg?s=612x612&w=0&k=20&c=dDDNcvIoG-4VdO01ZlENqODBoNocT434vIFp0duuTZM="
+            }
+        ];
 
-// Update fungsi window.onclick untuk menggunakan overlay
-window.onclick = function(event) {
-    if (!event.target.matches('.dropdown-btn') && !event.target.closest('.dropdown-btn') && !event.target.closest('.dropdown-content')) {
-        const dropdown = document.getElementById('dropdown-content');
-        const overlay = document.querySelector('.dropdown-overlay');
-        if (dropdown) dropdown.classList.remove('show');
-        if (overlay) overlay.classList.remove('show');
-    }
-}
+        let currentTestimonial = 0;
+        let testimonialInterval;
 
-function filterProjects(category) {
-    const cards = document.querySelectorAll('.project-card');
-    const selectedFilter = document.getElementById('selected-filter');
-    
-    const categoryNames = {
-        'all': 'All Projects',
-        'ui-design': 'UI Design',
-        'web-development': 'Web Development',
-        'mobile-app': 'Mobile App',
-        'branding': 'Branding'
-    };
-    
-    selectedFilter.textContent = categoryNames[category];
-    
-    // Add staggered animation to visible cards
-    let visibleIndex = 0;
-    cards.forEach((card, index) => {
-        if (category === 'all' || card.dataset.category === category) {
-            card.classList.remove('hidden');
-            card.style.transitionDelay = `${visibleIndex * 0.1}s`;
-            card.classList.remove('animate');
-            
+        const showTestimonial = (index) => {
+            const card = document.getElementById('testimonial-card');
+            const testimonial = testimonials[index];
+
+            card.style.opacity = '0';
+
             setTimeout(() => {
-                card.classList.add('animate');
-            }, 50);
-            
-            visibleIndex++;
-        } else {
-            card.classList.add('hidden');
-            card.classList.remove('animate');
-        }
-    });
-    
-    document.getElementById('dropdown-content').classList.remove('show');
-}
+                document.querySelector('.testimonial-quote').textContent = `"${testimonial.quote}"`;
+                document.querySelector('.testimonial-author').textContent = testimonial.author;
+                document.querySelector('.testimonial-image').src = testimonial.image;
 
-// Close dropdown when clicking outside
-window.onclick = function(event) {
-    if (!event.target.matches('.dropdown-btn') && !event.target.closest('.dropdown-btn')) {
-        const dropdown = document.getElementById('dropdown-content');
-        dropdown.classList.remove('show');
-    }
-}
+                card.style.opacity = '1';
 
-// Enhanced Testimonials functionality
-const testimonials = [
-    {
-        quote: "Great things are not done by impulse, but by a series of small things brought together",
-        author: "Leonardo - CEO of Jalu Company",
-        image: "image.png"
-    },
-    {
-        quote: "Sandy's attention to detail and creative approach made our project exceptional. Highly recommended!",
-        author: "Sarah Johnson - Marketing Director",
-        image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face"
-    },
-    {
-        quote: "Professional, reliable, and delivers outstanding results. A pleasure to work with.",
-        author: "Michael Chen - Startup Founder",
-        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face"
-    }
-];
-
-let currentTestimonial = 0;
-let testimonialInterval;
-
-function showTestimonial(index) {
-    const card = document.getElementById('testimonial-card');
-    const testimonial = testimonials[index];
-    
-    // Add exit animation
-    card.style.opacity = '0';
-    card.style.transform = 'translateX(-30px)';
-    
-    setTimeout(() => {
-        document.querySelector('.testimonial-quote').textContent = `"${testimonial.quote}"`;
-        document.querySelector('.testimonial-author').textContent = testimonial.author;
-        document.querySelector('.testimonial-image').src = testimonial.image;
-        
-        // Add enter animation
-        card.style.opacity = '1';
-        card.style.transform = 'translateX(0)';
-        
-        // Update dots
-        document.querySelectorAll('.nav-dot').forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-        
-        currentTestimonial = index;
-    }, 300);
-}
-
-function nextTestimonial() {
-    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-    showTestimonial(currentTestimonial);
-}
-
-function previousTestimonial() {
-    currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-    showTestimonial(currentTestimonial);
-}
-
-function startTestimonialRotation() {
-    testimonialInterval = setInterval(nextTestimonial, 5000);
-}
-
-function stopTestimonialRotation() {
-    clearInterval(testimonialInterval);
-}
-
-// Start auto-rotation
-startTestimonialRotation();
-
-// Pause on hover
-document.querySelector('.testimonials-section').addEventListener('mouseenter', stopTestimonialRotation);
-document.querySelector('.testimonials-section').addEventListener('mouseleave', startTestimonialRotation);
-
-// Enhanced Button ripple effects
-document.querySelectorAll('.btn, .connect-button, .interest-btn, .contact-social-link, .footer-like').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        if (this.href && this.href.includes('mailto:')) {
-            return; // Don't prevent default for email links
-        }
-        
-        if (this.href && this.href.includes('#')) {
-            e.preventDefault();
-            const targetId = this.href.split('#')[1];
-            const targetSection = document.querySelector(this.getAttribute('href'));
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
                 });
-            }
-        }
-        
-        // Create ripple effect
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        const x = e.clientX - rect.left - size / 2;
-        const y = e.clientY - rect.top - size / 2;
-        
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = x + 'px';
-        ripple.style.top = y + 'px';
-        ripple.style.position = 'absolute';
-        ripple.style.borderRadius = '50%';
-        ripple.style.background = 'rgba(255, 255, 255, 0.3)';
-        ripple.style.transform = 'scale(0)';
-        ripple.style.animation = 'ripple 0.6s linear';
-        ripple.style.pointerEvents = 'none';
-        ripple.style.zIndex = '1000';
-        
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-        
-        setTimeout(() => {
-            ripple.remove();
-        }, 600);
-    });
-});
 
-// Smooth scroll for all internal links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+                currentTestimonial = index;
+            }, 300);
+        };
+
+        const startRotation = () => {
+            testimonialInterval = setInterval(() => {
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+            }, 5000);
+        };
+
+        const stopRotation = () => {
+            clearInterval(testimonialInterval);
+        };
+
+        document.querySelectorAll('.nav-dot').forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                stopRotation();
+                showTestimonial(index);
+                startRotation();
+            });
+        });
+
+        const arrows = document.querySelectorAll('.nav-arrow');
+        if (arrows.length >= 2) {
+            arrows[0].addEventListener('click', () => {
+                stopRotation();
+                currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+                showTestimonial(currentTestimonial);
+                startRotation();
+            });
+
+            arrows[1].addEventListener('click', () => {
+                stopRotation();
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+                showTestimonial(currentTestimonial);
+                startRotation();
             });
         }
-    });
+
+        startRotation();
+
+        const testimonialsSection = document.querySelector('.testimonials-section');
+        if (testimonialsSection) {
+            testimonialsSection.addEventListener('mouseenter', stopRotation);
+            testimonialsSection.addEventListener('mouseleave', startRotation);
+        }
+    }
+
+    setupButtonEffects() {
+        const createRipple = (e) => {
+            const btn = e.currentTarget;
+            const ripple = document.createElement('span');
+            const rect = btn.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+
+            ripple.style.width = ripple.style.height = `${size}px`;
+            ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+            ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.pointerEvents = 'none';
+
+            btn.style.position = 'relative';
+            btn.style.overflow = 'hidden';
+            btn.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 600);
+        };
+
+        document.querySelectorAll('.btn, .connect-button, .interest-btn, .contact-social-link, .footer-like').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                if (this.href && !this.href.includes('mailto:')) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+                createRipple(e);
+            });
+        });
+
+        // Pindahkan ke luar ripple
+        document.querySelectorAll('.footer-like').forEach(btn => {
+            btn.addEventListener('click', function () {
+                this.classList.toggle('active');
+            });
+        });
+    }
+
+    setupSmoothScrolling() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        const header = document.getElementById('header');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollPos = window.scrollY + 100;
+
+            if (scrollPos > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            document.querySelectorAll('section[id]').forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.offsetHeight;
+
+                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                    const id = section.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        });
+    }
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', () => {
+    const animationController = new AnimationController();
+
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes ripple {
+            to { transform: scale(4); opacity: 0; }
+        }
+        .dropdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: 9998;
+            display: none;
+        }
+        .dropdown-overlay.show {
+            display: block;
+        }
+        .dropdown-content a.active {
+            background: rgba(124, 58, 237, 0.3);
+            color: white;
+            font-weight: 500;
+        }
+        .footer-like.active {
+            color: red;
+        }
+    `;
+    document.head.appendChild(style);
 });
 
-// Add CSS for enhanced animations
-const enhancedStyle = document.createElement('style');
-enhancedStyle.textContent = `
-    @keyframes ripple {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
+// Optional global toggle
+function toggleDropdown() {
+    const dropdownContent = document.getElementById('dropdown-content');
+    const dropdownOverlay = document.getElementById('dropdownOverlay');
+
+    if (dropdownContent.classList.contains('show')) {
+        dropdownContent.classList.remove('show');
+        dropdownOverlay.classList.remove('show');
+    } else {
+        dropdownContent.classList.add('show');
+        dropdownOverlay.classList.add('show');
     }
-    
-    .testimonial-card {
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    
-    .dropdown-content {
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-    
-    .site-header {
-        transition: transform 0.3s ease;
-    }
-    
-    /* Enhanced hover effects */
-    .project-card:hover .project-title {
-        animation: titleGlow 0.5s ease;
-    }
-    
-    @keyframes titleGlow {
-        50% {
-            text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
-        }
-    }
-    
-    .skill-category:hover {
-        animation: cardPulse 0.6s ease;
-    }
-    
-    @keyframes cardPulse {
-        50% {
-            box-shadow: 0 30px 60px rgba(124, 58, 237, 0.2);
-        }
-    }
-`;
-document.head.appendChild(enhancedStyle);
+}
