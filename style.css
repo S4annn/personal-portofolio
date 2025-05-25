@@ -23,7 +23,6 @@ body {
     flex-direction: column;
 }
 
-/* Enhanced Animations */
 .fade-in-up {
     opacity: 0;
     transform: translateY(30px);
@@ -72,7 +71,6 @@ body {
     transition-delay: var(--delay, 0s);
 }
 
-/* Header dan Navigasi */
 .site-header {
     display: flex;
     justify-content: space-between;
@@ -222,7 +220,6 @@ body {
     box-shadow: 0 8px 20px rgba(124, 58, 237, 0.3);
 }
 
-/* Konten Utama (Hero Section) */
 .hero-section {
     flex-grow: 1;
     display: flex;
@@ -416,7 +413,7 @@ body {
     justify-content: center;
     align-items: center;
     gap: 1rem; 
-    flex-direction: row; /* memastikan horizontal */
+    flex-direction: row; 
     flex-wrap: wrap;
     margin-top: 14px;
     opacity: 0;
@@ -470,7 +467,6 @@ body {
     border-color: rgba(124, 58, 237, 0.4);
 }
 
-/* CV Button Style */
 .cv-button {
     background: transparent;
     color: #e5e5e5;
@@ -511,8 +507,6 @@ body {
     color: white;
 }
 
-
-/* About Section */
 .about-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     color: #333;
@@ -611,7 +605,6 @@ body {
     color: #5b21b6;
 }
 
-/* Skills Section */
 .skills-section {
     background: linear-gradient(180deg, #111111 0%, #1a1a1a 50%, #111111 100%);
     padding: 100px 0;
@@ -802,7 +795,6 @@ body {
     100% { transform: translateX(100%); }
 }
 
-/* Projects Section */
 .projects-section {
     background: linear-gradient(180deg, #1a1a1a 0%, #111111 50%, #0a0a0a 100%);
     padding: 100px 0;
@@ -1172,7 +1164,6 @@ body {
     60% { transform: translateX(-50%) translateY(-5px); }
 }
 
-/* Interest Section */
 .interest-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     color: #333;
@@ -1264,7 +1255,6 @@ body {
     box-shadow: 0 12px 30px rgba(124, 58, 237, 0.25);
 }
 
-/* Testimonials Section */
 .testimonials-section {
     background: linear-gradient(180deg, #111111 0%, #1a1a1a 100%);
     padding: 100px 0;
@@ -1432,7 +1422,6 @@ body {
     transform: scale(1.2);
 }
 
-/* Contact Section */
 .contact-section {
     background: linear-gradient(180deg, #1a1a1a 0%, #111111 100%);
     padding: 100px 0;
@@ -1537,7 +1526,6 @@ body {
     color: white;
 }
 
-/* Footer */
 .footer {
     background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
     padding: 80px 0 40px;
@@ -1703,9 +1691,23 @@ body {
     visibility: visible;
 }
 
+#typed-text {
+    display: inline;
+  }
 
+  #typed-cursor {
+    display: inline;
+    color: #6c63ff;
+    animation: blink 0.7s infinite;
+    font-weight: bold;
+  }
 
-/* Media Queries */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+
 @media (max-width: 1200px) {
     .site-header { padding: 21px 35px; }
     .logo { font-size: 20px; }
@@ -1723,7 +1725,6 @@ body {
     .projects-header h2, .skills-header h2, .contact-title { font-size: 2.5rem; }
     .interest-title { font-size: 2rem; }
 
-    /* Responsive untuk skills grid */
     .skills-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1872,9 +1873,6 @@ body {
     margin-bottom: 12px;
 }
 
-
-/* Smooth scrolling */
-
 body,html{
     margin:0;
     padding:0;
@@ -1884,12 +1882,10 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Section spacing */
 section {
     scroll-margin-top: 80px; 
 }
 
-/* Loading animation */
 .loading-overlay {
     position: fixed;
     top: 0;
