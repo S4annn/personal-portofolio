@@ -14,6 +14,7 @@
             integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
             crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="style.css">
+
     </head>
     <body>
         <!-- Loading Overlay -->
@@ -23,6 +24,9 @@
 
         <div class="container">
             <header class="site-header" id="header">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
                 <div class="logo">Sandy TP</div>
                 <nav class="main-nav">
                     <ul>
@@ -37,6 +41,22 @@
                         <li><a href="#contact" class="nav-link">Contact</a></li>
                     </ul>
                 </nav>
+
+                <nav id="mobileNav" class="mobile-nav">
+                    <ul>
+                        <li><a href="#home" class="nav-link">Home</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                        <li><a href="#skills" class="nav-link">Skills</a></li>
+                        <li><a href="#projects"
+                                class="nav-link">Projects</a></li>
+                        <li><a href="#testimonials"
+                                class="nav-link">Testimonials</a></li>
+                        <li><a href="#contact" class="nav-link">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Overlay untuk menutup mobile menu -->
+                <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
                 <div class="header-icons">
                     <a href="https://www.instagram.com/sndyytp._"
                         class="social-icon-link" title="Instagram"
@@ -84,7 +104,9 @@
                     Let's build something amazing together.
                 </p>
                 <div class="hero-buttons-container">
-                    <a href="your-cv-link.pdf" class="cv-button">Download CV</a>
+                    <a
+                        href="https://drive.google.com/drive/folders/1brePLCPOgXLQxGS0WjtzFXUM7rtJo3aX   "
+                        class="cv-button">Download CV</a>
                     <a href="#contact" class="connect-button">Let's Connect</a>
                 </div>
                 <div class="scroll-indicator">
@@ -415,10 +437,10 @@
                             <div class="project-info">
                                 <h3 class="project-title">Track Money App
                                     UI</h3>
-                                <p class="project-description">A modern NFT
-                                    marketplace platform with dark theme design,
-                                    featuring collection browsing and trading
-                                    capabilities.</p>
+                                <p class="project-description">A modern track
+                                    money app
+                                    UI design,
+                                    simple track , budget, transaction, etc</p>
                                 <div class="project-actions">
                                     <a href="#" class="btn btn-primary">
                                         <svg class="icon" fill="none"
@@ -440,7 +462,7 @@
                                                 stroke-width="2"
                                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
-                                        View Website
+                                        View Design
                                     </a>
                                 </div>
                             </div>
@@ -543,7 +565,7 @@
                                                 stroke-width="2"
                                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
-                                        View Website
+                                        View Design
                                     </a>
                                 </div>
                             </div>
@@ -619,11 +641,9 @@
                             </div>
                             <div class="project-info">
                                 <h3 class="project-title">Cake Store UI</h3>
-                                <p class="project-description">Rent a car you
-                                    need
-                                    with this modern car rental platform
-                                    featuring
-                                    booking system and vehicle comparison.</p>
+                                <p class="project-description">Cake Store UI is
+                                    a clean and modern user interface design for
+                                    an online cake shop.</p>
                                 <div class="project-actions">
                                     <a href="#" class="btn btn-primary">
                                         <svg class="icon" fill="none"
@@ -645,7 +665,7 @@
                                                 stroke-width="2"
                                                 d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                         </svg>
-                                        View Website
+                                        View Design
                                     </a>
                                 </div>
                             </div>
@@ -809,7 +829,7 @@
                 </div>
                 <footer class="text-center text-gray-500 text-sm mt-8">
                     &copy; 2025 Sandy Teuku Pranata. All rights reserved.
-                  </footer>                  
+                </footer>
             </footer>
             <script src="script.js"></script>
         </body>

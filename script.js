@@ -1,4 +1,3 @@
-// Enhanced Animation System
 class AnimationController {
     constructor() {
         this.observerOptions = {
@@ -13,6 +12,7 @@ class AnimationController {
         this.setupIntersectionObserver();
         this.setupLoadingAnimation();
         this.setupDropdown();
+        this.setupMobileMenu();
         this.setupTestimonials();
         this.setupButtonEffects();
         this.setupSmoothScrolling();
@@ -55,6 +55,30 @@ class AnimationController {
                     loadingOverlay.style.display = 'none';
                 }, 500);
             }, 1000);
+        });
+    }
+
+    setupMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        const navLinks = document.querySelectorAll('.mobile-nav .nav-link');
+
+        if (!mobileMenuBtn || !mobileNav || !mobileNavOverlay) return;
+
+        const toggleMobileMenu = () => {
+            mobileNav.classList.toggle('open');
+            mobileNavOverlay.classList.toggle('open');
+            document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+        };
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        mobileNavOverlay.addEventListener('click', toggleMobileMenu);
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                toggleMobileMenu();
+            });
         });
     }
 
@@ -282,7 +306,6 @@ class AnimationController {
             });
         });
 
-        // Pindahkan ke luar ripple
         document.querySelectorAll('.footer-like').forEach(btn => {
             btn.addEventListener('click', function () {
                 this.classList.toggle('active');
