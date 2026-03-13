@@ -409,8 +409,8 @@ class AnimationController {
         const icon = themeToggle.querySelector('i');
         const root = document.documentElement;
 
-        // Check local storage for saved theme, default to light
-        const savedTheme = localStorage.getItem('theme') || 'light';
+        // Check local storage for saved theme, default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
         root.setAttribute('data-theme', savedTheme);
         updateIcon(savedTheme);
 
@@ -621,7 +621,7 @@ class AnimationController {
             },
             detectRetina: true,
         });
-        
+
         // Listen for theme changes to update particle colors dynamically
         const themeToggle = document.getElementById('themeToggle');
         if (themeToggle && !this.tsparticlesThemeInitialized) {
