@@ -636,6 +636,11 @@ class AnimationController {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Clean URL parameters (like utm_source, fbclid) for a cleaner look
+    if (window.history && window.history.replaceState && window.location.search) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+
     new AnimationController();
 
     const style = document.createElement('style');
