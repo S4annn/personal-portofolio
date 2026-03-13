@@ -17,6 +17,10 @@
 
     </head>
     <body>
+        <!-- Premium UI Elements -->
+        <div class="cursor-dot" data-cursor></div>
+        <div class="cursor-outline" data-cursor></div>
+
         <div class="loading-overlay" id="loadingOverlay">
             <div class="loading-spinner"></div>
         </div>
@@ -78,6 +82,9 @@
             </header>
 
             <section id="home" class="hero-section">
+                <div class="hero-glow glow-1"></div>
+                <div class="hero-glow glow-2"></div>
+                
                 <div class="profile-image-container">
                     <img class="profile-image" src="images/sandy.png"
                         alt="Foto Profil Sandy Teuku Pranata" />
@@ -899,8 +906,9 @@
 
             <footer class="footer">
                 <div class="footer-container">
-                    <div class="footer-like">
-                        <i class="fas fa-thumbs-up"></i>
+                    <div class="footer-like" id="likeButton" title="Do you like my portfolio?">
+                        <i class="fas fa-heart"></i>
+                        <span class="like-counter" id="likeCounter">124</span>
                     </div>
 
                     <div class="footer-title">Personal Portfolio design
@@ -937,6 +945,11 @@
                     reserved.
                 </footer>
             </footer>
+            
+            <!-- Back to Top Button -->
+            <button id="backToTop" class="back-to-top" aria-label="Back to top">
+                <i class="fas fa-arrow-up"></i>
+            </button>
             <script src="script.js"></script>
         </body>
     </html>

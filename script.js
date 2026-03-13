@@ -18,7 +18,11 @@ class AnimationController {
         this.setupSmoothScrolling();
         this.setupFiltering();
         this.setupTypingEffect();
-        this.setupThemeToggle(); 
+        this.setupThemeToggle();
+        this.setupCustomCursor();
+        this.setupTiltEffect();
+        this.setupBackToTop();
+        this.setupLikeButton();
     }
 
     setupIntersectionObserver() {
@@ -348,22 +352,43 @@ class AnimationController {
     setupTypingEffect() {
         const typedText = document.getElementById('typed-text');
         const cursor = document.getElementById('typed-cursor');
-        const fullText = "Hi! I Am\nSandy Teuku Pranata";
-    
+        const texts = [
+            "Sandy Teuku Pranata",
+        ];
+
         if (!typedText || !cursor) return;
-    
-        typedText.innerHTML = "";
-        let i = 0;
-    
+
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
         function type() {
-            if (i < fullText.length) {
-                const char = fullText[i] === "\n" ? "<br>" : fullText[i];
-                typedText.innerHTML += char;
-                i++;
-                setTimeout(type, 100);
+            const currentText = texts[textIndex];
+
+            if (isDeleting) {
+                typedText.innerHTML = "Hi! I Am<br>" + currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedText.innerHTML = "Hi! I Am<br>" + currentText.substring(0, charIndex + 1);
+                charIndex++;
             }
+
+            let typingSpeed = isDeleting ? 50 : 100; // Faster backspace
+
+            if (!isDeleting && charIndex === currentText.length) {
+                // Pause at the end of typing
+                typingSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                // Move to next phrase
+                textIndex = (textIndex + 1) % texts.length;
+                typingSpeed = 500; // Pause before typing new text
+            }
+
+            setTimeout(type, typingSpeed);
         }
-    
+
         type();
     }
 
@@ -382,7 +407,7 @@ class AnimationController {
         themeToggle.addEventListener('click', () => {
             const currentTheme = root.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
+
             root.setAttribute('data-theme', newTheme);
             localStorage.setItem('theme', newTheme);
             updateIcon(newTheme);
@@ -397,7 +422,145 @@ class AnimationController {
                 icon.classList.add('fa-moon');
             }
         }
-    }     
+    }
+
+    setupCustomCursor() {
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        if (!cursorDot || !cursorOutline) return;
+
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Subtle delay for the outline
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Add hover effect to interactive elements
+        const interactibles = document.querySelectorAll('a, button, .footer-project, .dropdown-btn, input, textarea');
+        interactibles.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.classList.remove('hover');
+            });
+        });
+    }
+
+    setupTiltEffect() {
+        const tiltElements = document.querySelectorAll('.profile-image-container');
+
+        tiltElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * -15; // Max 15deg rotation
+                const rotateY = ((x - centerX) / centerX) * 15;
+
+                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                el.style.transition = 'transform 0.1s ease';
+            });
+
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                el.style.transition = 'transform 0.5s ease';
+            });
+        });
+    }
+
+    setupBackToTop() {
+        const backToTopBtn = document.getElementById('backToTop');
+        if (!backToTopBtn) return;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    setupLikeButton() {
+        const likeBtn = document.getElementById('likeButton');
+        const likeCounter = document.getElementById('likeCounter');
+        if (!likeBtn || !likeCounter) return;
+
+        // Ensure baseline likes is a believable number
+        let likes = parseInt(localStorage.getItem('portfolio_likes')) || 194;
+        let hasLiked = localStorage.getItem('portfolio_has_liked') === 'true';
+
+        likeCounter.innerText = likes;
+        if (hasLiked) {
+            likeBtn.classList.add('liked');
+            likeBtn.querySelector('i').classList.replace('far', 'fas');
+        }
+
+        likeBtn.addEventListener('click', (e) => {
+            if (hasLiked) return; // Prevent multiple likes
+
+            likes++;
+            hasLiked = true;
+            localStorage.setItem('portfolio_likes', likes);
+            localStorage.setItem('portfolio_has_liked', 'true');
+
+            likeCounter.innerText = likes;
+            likeBtn.classList.add('liked');
+
+            const icon = likeBtn.querySelector('i');
+            icon.classList.replace('far', 'fas');
+
+            // Pop animation
+            likeBtn.style.transform = 'scale(1.15)';
+            setTimeout(() => {
+                likeBtn.style.transform = '';
+            }, 200);
+
+            // Create floating hearts
+            for (let i = 0; i < 4; i++) {
+                setTimeout(() => createFloatingHeart(), i * 100);
+            }
+        });
+
+        function createFloatingHeart() {
+            const heart = document.createElement('i');
+            heart.classList.add('fas', 'fa-heart', 'floating-heart');
+
+            // Random horizontal offset
+            const offset = (Math.random() - 0.5) * 60;
+            heart.style.left = `calc(50% + ${offset}px)`;
+            heart.style.top = '10px';
+
+            likeBtn.appendChild(heart);
+
+            setTimeout(() => {
+                if (likeBtn.contains(heart)) {
+                    heart.remove();
+                }
+            }, 1000);
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
