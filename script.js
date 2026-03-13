@@ -76,6 +76,15 @@ class AnimationController {
             mobileNav.classList.toggle('open');
             mobileNavOverlay.classList.toggle('open');
             document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileNav.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
         };
 
         mobileMenuBtn.addEventListener('click', toggleMobileMenu);
