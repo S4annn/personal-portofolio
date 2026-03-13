@@ -446,21 +446,27 @@ body {
 }
 
 .role-fullstack {
-    bottom: 25px;
-    left: -160px;
+    bottom: 30px;
+    left: -170px;
     animation: badgeSlideIn 0.8s ease-out 1.2s forwards;
 }
 
 .role-uiux {
-    top: 100px;
-    right: -150px;
+    top: 30px;
+    left: -140px;
     animation: badgeSlideIn 0.8s ease-out 1.4s forwards;
 }
 
 .role-ai {
-    top: 10px;
-    right: -140px;
+    top: 30px;
+    right: -130px;
     animation: badgeSlideIn 0.8s ease-out 1.3s forwards;
+}
+
+.role-roblox {
+    bottom: 30px;
+    right: -190px;
+    animation: badgeSlideIn 0.8s ease-out 1.5s forwards;
 }
 
 @keyframes badgeSlideIn {
