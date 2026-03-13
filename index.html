@@ -82,55 +82,49 @@
             </header>
 
             <section id="home" class="hero-section">
+                <!-- Interactive Particles Background -->
+                <div id="tsparticles"></div>
+
                 <div class="hero-glow glow-1"></div>
                 <div class="hero-glow glow-2"></div>
                 
-                <div class="profile-image-container">
-                    <img class="profile-image" src="images/sandy.png"
-                        alt="Foto Profil Sandy Teuku Pranata" />
-
-                    <div class="pointing-arrow arrow-for-uiux">
-                        <i class="fa-solid fa-arrow-pointer"></i>
+                <div class="hero-content-wrapper">
+                    <!-- Left Side: Text and CTA -->
+                    <div class="hero-content-left">
+                        <h1 class="hero-title" id="typed-title">
+                            <span id="typed-text"></span><span id="typed-cursor">|</span>
+                        </h1>
+                        <p class="hero-subtitle">
+                            A passionate design enthusiast and fullstack developer. I create beautiful, functional, and user-centered digital experiences. With expertise in both frontend and backend development, I bring ideas to life through clean code and intuitive design. Let's build something amazing together.
+                        </p>
+                        <div class="hero-buttons-container">
+                            <a href="https://drive.google.com/drive/folders/1brePLCPOgXLQxGS0WjtzFXUM7rtJo3aX" class="cv-button">Download CV</a>
+                            <a href="#contact" class="connect-button">Let's Connect</a>
+                        </div>
                     </div>
 
-                    <div class="pointing-arrow arrow-for-fullstack">
-                        <i class="fa-solid fa-arrow-pointer"></i>
-                    </div>
+                    <!-- Right Side: Visuals, Image, Ornaments -->
+                    <div class="hero-visual-right">
+                        <div class="profile-image-container">
+                            <img class="profile-image" src="images/sandy.png" alt="Foto Profil Sandy Teuku Pranata" />
 
-                    <div class="pointing-arrow arrow-for-ai">
-                        <i class="fa-solid fa-arrow-pointer"></i>
-                    </div>
+                            <div class="role-badge role-fullstack">Fullstack Developer</div>
+                            <div class="role-badge role-uiux">UI/UX Designer</div>
+                            <div class="role-badge role-ai">AI Engineer</div>
+                        </div>
 
-                    <div class="role-badge role-fullstack">Fullstack
-                        Developer</div>
-                    <div class="role-badge role-uiux">UI/UX Designer</div>
-                    <div class="role-badge role-ai">AI Engineer</div>
+                        <!-- Modern Glassmorphism Stat Cards -->
+                        <div class="hero-stat-card stat-1 fade-in-up stagger-animation" style="--delay: 1.5s">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Projects<br>Completed</div>
+                        </div>
+                        <div class="hero-stat-card stat-2 fade-in-up stagger-animation" style="--delay: 1.7s">
+                            <div class="stat-number">1+</div>
+                            <div class="stat-label">Years<br>Experience</div>
+                        </div>
+                    </div>
                 </div>
 
-                <h1 class="hero-title" id="typed-title">
-                    <span id="typed-text"></span><span
-                        id="typed-cursor">|</span>
-                </h1>
-
-                <p class="hero-subtitle">
-                    A passionate design enthusiast and fullstack
-                    developer. I
-                    create beautiful, functional, and user-centered
-                    digital
-                    experiences.
-                    With expertise in both frontend and backend
-                    development, I
-                    bring ideas to life through clean code and intuitive
-                    design.
-                    Let's build something amazing together.
-                </p>
-                <div class="hero-buttons-container">
-                    <a
-                        href="https://drive.google.com/drive/folders/1brePLCPOgXLQxGS0WjtzFXUM7rtJo3aX   "
-                        class="cv-button">Download CV</a>
-                    <a href="#contact" class="connect-button">Let's
-                        Connect</a>
-                </div>
                 <div class="scroll-indicator">
                     <i class="fas fa-chevron-down"></i>
                 </div>
@@ -950,6 +944,8 @@
             <button id="backToTop" class="back-to-top" aria-label="Back to top">
                 <i class="fas fa-arrow-up"></i>
             </button>
+            <!-- tsParticles Script -->
+            <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
             <script src="script.js"></script>
         </body>
     </html>

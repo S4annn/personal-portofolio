@@ -23,6 +23,7 @@ class AnimationController {
         this.setupTiltEffect();
         this.setupBackToTop();
         this.setupLikeButton();
+        this.setupHeroParticles();
     }
 
     setupIntersectionObserver() {
@@ -568,6 +569,68 @@ class AnimationController {
                     heart.remove();
                 }
             }, 1000);
+        }
+    }
+
+    setupHeroParticles() {
+        if (typeof tsParticles === 'undefined') {
+            console.warn('tsParticles library not loaded');
+            return;
+        }
+
+        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+        const particleColor = isDarkMode ? "#a855f7" : "#7c3aed";
+        const linkColor = isDarkMode ? "#6d28d9" : "#a855f7";
+
+        tsParticles.load("tsparticles", {
+            fullScreen: { enable: false, zIndex: 0 },
+            fpsLimit: 60,
+            interactivity: {
+                events: {
+                    onClick: { enable: true, mode: "push" },
+                    onHover: { enable: true, mode: "grab" },
+                    resize: true,
+                },
+                modes: {
+                    push: { quantity: 4 },
+                    grab: { distance: 200, links: { opacity: 0.3 } }
+                },
+            },
+            particles: {
+                color: { value: particleColor },
+                links: {
+                    color: linkColor,
+                    distance: 150,
+                    enable: true,
+                    opacity: 0.2,
+                    width: 1,
+                },
+                collisions: { enable: false },
+                move: {
+                    direction: "none",
+                    enable: true,
+                    outModes: { default: "bounce" },
+                    random: true,
+                    speed: 1,
+                    straight: false,
+                },
+                number: { value: window.innerWidth < 768 ? 30 : 80, density: { enable: true, area: 800 } },
+                opacity: { value: 0.5, random: true },
+                shape: { type: "circle" },
+                size: { value: { min: 1, max: 3 }, random: true },
+            },
+            detectRetina: true,
+        });
+        
+        // Listen for theme changes to update particle colors dynamically
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle && !this.tsparticlesThemeInitialized) {
+            this.tsparticlesThemeInitialized = true;
+            themeToggle.addEventListener('click', () => {
+                setTimeout(() => {
+                    this.setupHeroParticles(); // Reload particles with new theme colors
+                }, 100);
+            });
         }
     }
 }

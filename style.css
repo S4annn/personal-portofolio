@@ -223,15 +223,57 @@ body {
 .hero-section {
     flex-grow: 1;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 120px 14px 28px;
     position: relative;
     min-height: 100vh;
     background: radial-gradient(ellipse at top, rgba(124, 58, 237, 0.12) 0%, rgba(248, 250, 252, 0) 70%);
     overflow: hidden; /* For the ambient glow */
+}
+
+/* tsParticles container */
+#tsparticles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: auto;
+}
+
+.hero-content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative;
+    z-index: 10;
+    pointer-events: none; /* Let clicks pass to particles */
+}
+
+.hero-content-wrapper * {
+    pointer-events: auto; /* Re-enable for inner elements */
+}
+
+.hero-content-left {
+    flex: 1;
+    max-width: 600px;
+    text-align: left;
+}
+
+.hero-visual-right {
+    flex: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 450px;
 }
 
 /* Hero Ambient Glows */
@@ -271,6 +313,8 @@ body {
     0% { transform: translate(0, 0) scale(1); }
     100% { transform: translate(-80px, -60px) scale(0.9); }
 }
+
+/* Removed floatParticle keyframes and hero-particle class */
 
 .profile-image-container {
     position: relative;
@@ -325,60 +369,7 @@ body {
     border-color: rgba(124, 58, 237, 0.4);
 }
 
-.pointing-arrow {
-    position: absolute;
-    color: #7c3aed;
-    font-size: 20px;
-    opacity: 0;
-    z-index: 5;
-    animation: arrowFloat 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 10px rgba(124, 58, 237, 0.3));
-}
-
-.arrow-for-uiux {
-    bottom: 110px;
-    right: -85px;
-    transform: rotate(-30deg);
-    transform-origin: center bottom;
-    animation: arrowFloat 3s ease-in-out infinite, fadeInArrow 1s ease-out 1.5s forwards;
-}
-
-.arrow-for-ai {
-    top: 5px;
-    left: -100px;
-    transform: rotate(135deg);
-    transform-origin: center bottom;
-    animation: arrowFloat3 3s ease-in-out infinite, fadeInArrow 1s ease-out 1.6s forwards;
-}
-
-.arrow-for-fullstack {
-    bottom: 60px;
-    left: -110px;
-    transform: rotate(45deg);
-    transform-origin: center bottom;
-    animation: arrowFloat2 3s ease-in-out infinite, fadeInArrow 1s ease-out 1.7s forwards;
-}
-
-@keyframes fadeInArrow {
-    to {
-        opacity: 0.6;
-    }
-}
-
-@keyframes arrowFloat {
-    0%, 100% { transform: translateY(0px) rotate(-30deg); }
-    50% { transform: translateY(-10px) rotate(-30deg); }
-}
-
-@keyframes arrowFloat2 {
-    0%, 100% { transform: translateY(0px) rotate(45deg); }
-    50% { transform: translateY(-10px) rotate(45deg); }
-}
-
-@keyframes arrowFloat3 {
-    0%, 100% { transform: translateY(0px) rotate(135deg); }
-    50% { transform: translateY(-10px) rotate(135deg); }
-}
+/* Removed pointing arrows to clean up the modern stat-card layout */
 
 .role-badge {
     display: inline-block;
@@ -406,20 +397,20 @@ body {
 }
 
 .role-fullstack {
-    bottom: -15px;
-    left: -240px;
+    bottom: 25px;
+    left: -160px;
     animation: badgeSlideIn 0.8s ease-out 1.2s forwards;
 }
 
 .role-uiux {
-    bottom: 25px;
-    right: -210px;
+    top: 100px;
+    right: -150px;
     animation: badgeSlideIn 0.8s ease-out 1.4s forwards;
 }
 
 .role-ai {
-    top: -30px;
-    left: -200px;
+    top: 10px;
+    right: -140px;
     animation: badgeSlideIn 0.8s ease-out 1.3s forwards;
 }
 
@@ -444,6 +435,7 @@ body {
     opacity: 0;
     transform: translateY(30px);
     animation: titleSlideUp 1s ease-out 0.8s forwards;
+    text-align: left;
 }
 
 @keyframes titleSlideUp {
@@ -463,6 +455,7 @@ body {
     color: #475569;
     transform: translateY(20px);
     animation: subtitleFadeIn 1s ease-out 1.2s forwards;
+    text-align: left;
 }
 
 @keyframes subtitleFadeIn {
@@ -476,7 +469,7 @@ body {
     position: relative;
     z-index: 10;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap: 1.5rem; 
     flex-direction: row; 
@@ -581,6 +574,53 @@ body {
     box-shadow: 0 15px 30px rgba(124, 58, 237, 0.15);
     color: #7c3aed;
 }
+
+/* Glassmorphism Stat Cards */
+.hero-stat-card {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    z-index: 5;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.hero-stat-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    box-shadow: 0 25px 50px rgba(124, 58, 237, 0.15);
+    border-color: rgba(124, 58, 237, 0.3);
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+.stat-1 { top: -20px; left: -90px; z-index: 10; }
+.stat-2 { bottom: -30px; right: -90px; z-index: 10; }
 
 .about-section {
     background: #ffffff; /* Clean white */
@@ -1872,6 +1912,35 @@ body {
         align-items: center;
         width: 100%;
     }
+    
+    .hero-content-wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 30px;
+        padding-top: 20px;
+    }
+    
+    .hero-content-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-title, .hero-subtitle {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons-container {
+        justify-content: center;
+    }
+
+    .stat-1 { top: -10px; left: -20px; padding: 10px 14px; z-index: 10; }
+    .stat-2 { bottom: -10px; right: -20px; padding: 10px 14px; z-index: 10; }
+    .stat-number { font-size: 20px; }
+    .stat-label { font-size: 11px; }
+
     .main-nav ul { flex-direction: column; margin-top: 14px; }
     .main-nav ul li { margin: 7px 0; }
     .header-icons { margin-top: 14px; }
@@ -2185,6 +2254,7 @@ section {
 [data-theme="dark"] .hero-section { background: radial-gradient(ellipse at top, rgba(124, 58, 237, 0.08) 0%, rgba(10, 10, 10, 0) 70%); }
 [data-theme="dark"] .glow-1 { background: radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%); }
 [data-theme="dark"] .glow-2 { background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%); }
+[data-theme="dark"] .hero-particle { filter: blur(3px); opacity: 0.8 !important; }
 [data-theme="dark"] .role-badge { background: rgba(0, 0, 0, 0.5); color: #e5e5e5; border-color: rgba(255,255,255,0.1); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 [data-theme="dark"] .role-badge:hover { background: rgba(124, 58, 237, 0.2); color: white; border-color: rgba(124, 58, 237, 0.5); }
 [data-theme="dark"] .hero-title { background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, #a855f7 100%); -webkit-background-clip: text; background-clip: text; text-shadow: 0 10px 40px rgba(124, 58, 237, 0.2); }
@@ -2195,6 +2265,8 @@ section {
 [data-theme="dark"] .cv-button::after { background: #111111; }
 [data-theme="dark"] .cv-button:hover::before { background: linear-gradient(135deg, #7c3aed, #a855f7); }
 [data-theme="dark"] .cv-button:hover { color: #a855f7; box-shadow: 0 15px 30px rgba(124, 58, 237, 0.2); }
+[data-theme="dark"] .hero-stat-card { background: rgba(15, 23, 42, 0.85); border-color: rgba(255,255,255,0.1); }
+[data-theme="dark"] .stat-label { color: #94a3b8; }
 
 [data-theme="dark"] .about-section { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; }
 [data-theme="dark"] .about-section::before { background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.3), transparent); }
