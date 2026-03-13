@@ -17,7 +17,8 @@ class AnimationController {
         this.setupButtonEffects();
         this.setupSmoothScrolling();
         this.setupFiltering();
-        this.setupTypingEffect(); 
+        this.setupTypingEffect();
+        this.setupThemeToggle(); 
     }
 
     setupIntersectionObserver() {
@@ -272,7 +273,7 @@ class AnimationController {
             ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
             ripple.style.position = 'absolute';
             ripple.style.borderRadius = '50%';
-            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.background = 'rgba(0, 0, 0, 0.1)'; /* Darker ripple for light theme */
             ripple.style.transform = 'scale(0)';
             ripple.style.animation = 'ripple 0.6s linear';
             ripple.style.pointerEvents = 'none';
@@ -364,6 +365,38 @@ class AnimationController {
         }
     
         type();
+    }
+
+    setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        if (!themeToggle) return;
+
+        const icon = themeToggle.querySelector('i');
+        const root = document.documentElement;
+
+        // Check local storage for saved theme, default to light
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        root.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = root.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            root.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
     }     
 }
 
@@ -378,7 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
         #typed-title::after {
             content: '|';
             animation: blink 0.7s infinite;
-            color: #6c63ff;
+            color: #7c3aed; /* Updated to primary accent */
         }
         @keyframes blink {
             0%, 100% { opacity: 1; }
